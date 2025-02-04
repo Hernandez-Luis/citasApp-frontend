@@ -1,52 +1,59 @@
 import axios from 'axios';
+import axiosInstance from '../api/axiosConfig';
 
-const apiUrl = 'http://localhost:8080/citas';
+const apiUrl = '/citas';
 
-const CitaService = {
-  async getCitas() {
+  const getCitas = async () =>{
     try {
-      const response = await axios.get(apiUrl);
+      const response = await axiosInstance.get(apiUrl);
       console.log("Datos obtenidos:", response.data); // Verifica los datos aquí
       return response.data;
     } catch (error) {
       console.error('Error al obtener las citas:', error);
     }
-  },
+  };
 
-  async getCitaById(id) {
+  const getCitasById = async (id) => {
     try {
-      const response = await axios.get(`${apiUrl}/${id}`);
+      const response = await axiosInstance.get(`${apiUrl}/${id}`);
       return response.data;
     } catch (error) {
-      console.error('Error al obtener la cita por ID:', error);
+      console.error("Error al obtener la cita por id.")
     }
-  },
+  }
 
-  async createCita(cita) {
+
+  const createCita = async (cita) => {
     try {
-      const response = await axios.post(apiUrl, cita);
+      const response = await axiosInstance.post(apiUrl, cita);
       return response.data;
     } catch (error) {
       console.error('Error al crear la cita:', error);
     }
-  },
+  };
 
-  async updateCita(cita) {
+  const updateCita = async (cita,id) => {
     try {
-      const response = await axios.put(`${apiUrl}/${cita._id}`, cita);
+      const response = await axiosInstance.put(`${apiUrl}/${id}`, cita);
       return response.data;
     } catch (error) {
       console.error('Error al actualizar la cita:', error);
     }
-  },
+  };
 
-  async deleteCita(id) {
+  const deleteCita = async(id) => {
     try {
-      await axios.delete(`${apiUrl}/${id}`);
+      await axiosInstance.delete(`${apiUrl}/${id}`);
     } catch (error) {
       console.error('Error al eliminar la cita:', error);
     }
-  },
-};
+  };
 
-export default CitaService;
+
+export default {
+  getCitas,
+  createCita,
+  updateCita,
+  deleteCita,
+  getCitasById
+};

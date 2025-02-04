@@ -1,8 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CitaService from '../services/CitaService';
+import { useNavigate } from 'react-router-dom';
 
-const CitaForm = ({ cita, setCita, setCitas }) => {
-  const [formData, setFormData] = useState(cita || { nombre: '', fecha: '', descripcion: '' });
+const CitaForm = ({actualizarListaCitas, modoEditar, idActualizarCita}) => {
+  const navigate = useNavigate();
+  const formularioInicial = {
+    nombreMedico: "",
+    fechaCita: "",
+    condicion: "",
+    nombrePaciente: "",
+    edad: "",
+    motivo: ""
+  }
+  useEffect(() =>{
+    if(modoEditar){
+      console.log("ID ACTUALIZAR: ", idActualizarCita)
+      llenarFormularioDatosActualizar()
+    }
+  }, []);
+
+  const llenarFormularioDatosActualizar = async () => {
+    setFormData(await CitaService.getCitasById(idActualizarCita));
+  }
+
+  const [formData, setFormData] = useState(formularioInicial);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -11,41 +32,52 @@ const CitaForm = ({ cita, setCita, setCitas }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (cita) {
-      await CitaService.updateCita(formData);
-    } else {
-      await CitaService.createCita(formData);
+    console.log("idddd: ", idActualizarCita)
+    try {
+      if(modoEditar){
+        await CitaService.updateCita(formData,idActualizarCita)
+        navigate("/citas")
+      } else{
+        await CitaService.createCita(formData)
+      }
+
+      setFormData(formularioInicial);
+
+      actualizarListaCitas();
+    } catch (error) {
+      console.log("Error al guardar la cita: ", error)
     }
-    setCitas(await CitaService.getCitas());
-    setCita(null); // Reset form state
+
   };
+
+  
 
   return (
     <form onSubmit={handleSubmit}>
       <input
         type="text"
-        name="nombre"
-        value={formData.nombre}
+        name="nombrePaciente"
+        value={formData.nombrePaciente}
         onChange={handleChange}
         placeholder="Nombre"
         required
       />
       <input
         type="datetime-local"
-        name="fecha"
-        value={formData.fecha}
+        name="fechaCita"
+        value={formData.fechaCita}
         onChange={handleChange}
         required
       />
       <textarea
-        name="descripcion"
-        value={formData.descripcion}
+        name="condicion"
+        value={formData.condicion}
         onChange={handleChange}
         placeholder="Descripción"
         required
       />
-      <button type="submit">{cita ? 'Actualizar Cita' : 'Crear Cita'}</button>
-    </form>
+    <button type="submit">{modoEditar ? "Actualizar Cita" : "Crear Cita"}</button>
+</form>
   );
 };
 

@@ -4,20 +4,27 @@ import CitaList from '../components/CitaList';
 import CitaForm from '../components/CitaForm';
 
 const Citas = () => {
-  const [citas, setCitas] = useState([]);
-  const [cita, setCita] = useState(null);
 
-  useEffect(() => {
-    const fetchCitas = async () => {
-      setCitas(await CitaService.getCitas());
-    };
-    fetchCitas();
-  }, [setCitas]);
+  const [listaCitas,setListaCitas] = useState([]);
+
+  useEffect(() =>{
+    actualizarListaCitas();
+  }, []);
+
+  const actualizarListaCitas = async () => {
+    try{
+      const data = await CitaService.getCitas();
+      setListaCitas(data);
+    } catch(error){
+      console.log("Error al obtener las citas: ", error);
+    }
+  }
+ 
 
   return (
     <div>
-      <CitaForm cita={cita} setCita={setCita} setCitas={setCitas} />
-      <CitaList citas={citas} />
+      <CitaForm actualizarListaCitas={actualizarListaCitas} modoEditar={false}/>
+      <CitaList citasRegistradas={listaCitas}/>
     </div>
   );
 };

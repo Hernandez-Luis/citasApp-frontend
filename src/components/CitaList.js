@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import CitaService from '../services/CitaService';
 
-const CitaList = ({ citas }) => {
+const CitaList = ({citasRegistradas}) => {
+
+  if (!citasRegistradas) {
+    citasRegistradas = [];
+  }
+
   return (
     <div>
       <h2>Lista de Citas</h2>
       <ul>
-        {citas.map((cita) => (
-          <li key={cita._id}>
-            <Link to={`/citas/${cita._id}`}>{cita.nombre}</Link>
+        {citasRegistradas.map((cita) => (
+          <li key={cita.id}>
+            <Link to={`/citas/${cita.id}`}>{cita.nombrePaciente}</Link>
           </li>
         ))}
       </ul>
