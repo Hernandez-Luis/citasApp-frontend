@@ -4,6 +4,8 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Citas from './pages/Citas';
 import Login from './pages/Login';
+import Clinicas from './pages/Clinicas';
+
 import DetalleCita from './components/DetalleCita';
 
 const App = () => {
@@ -14,6 +16,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/citas" element={<Citas />} />
         <Route path="/citas/:id" element={<DetalleCita />} />
+        <Route path="/clinicas" element={<Clinicas />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
