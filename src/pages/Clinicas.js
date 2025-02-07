@@ -24,12 +24,17 @@ const ClinicaPage = () => {
   };
 
   const handleUpdateClinica = (updatedClinica) => {
+    if (!updatedClinica.id) {
+      console.error('La clínica no tiene ID');
+      return;
+    }
     ClinicaService.updateClinicas(updatedClinica, updatedClinica.id).then((clinica) => {
       setClinicas((prevClinicas) =>
         prevClinicas.map((c) => (c.id === clinica.id ? clinica : c))
       );
     });
   };
+  
 
   const handleDeleteClinica = (id) => {
     ClinicaService.deleteClinicas(id).then(() => {

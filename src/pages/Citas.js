@@ -13,6 +13,7 @@ const Citas = () => {
   const [listaPacientes, setListaPacientes] = useState([]);
   const [listaDoctores, setListaDoctores] = useState([]);
   const [selectedCita, setSelectedCita] = useState(null);
+  const [editarCita, setEditarCita] = useState([])
 
   useEffect(() => {
     actualizarListaCitas();
@@ -63,6 +64,19 @@ const Citas = () => {
     });
   };
 
+  const handleUpdateCitas = async (id) => {
+    console.log("Mostrando resultado: ", id);
+    try {
+      // Obtener la cita usando el id
+      const cita = await CitaService.getCitasById(id);
+      setEditarCita(cita)
+      console.log("cita",cita)
+    } catch (error) {
+      console.log("Error al obtener los detalles de la cita:", error);
+    }
+  };
+  
+
   const crearCita = () => {
 
   }
@@ -77,8 +91,8 @@ const Citas = () => {
 
   return (
     <div>
-      <CitaForm onSubmit={selectedCita ? actualizaCita : crearCita} cita={selectedCita} recuperarDoctores={listaDoctores} recuperarPacientes={listaPacientes} recuperarClinicas={listaClinicas} actualizarListaCitas={actualizarListaCitas} modoEditar={false} />
-      <CitaList citasRegistradas={listaCitas} onSelect={setSelectedCita} onDelete={handleDeleteCitas} />
+      <CitaForm editarCita={editarCita} onSubmit={selectedCita ? actualizaCita : crearCita} cita={selectedCita} recuperarDoctores={listaDoctores} recuperarPacientes={listaPacientes} recuperarClinicas={listaClinicas} actualizarListaCitas={actualizarListaCitas} modoEditar={false} />
+      <CitaList citasRegistradas={listaCitas} onSelect={handleUpdateCitas} onDelete={handleDeleteCitas} />
     </div>
   );
 };

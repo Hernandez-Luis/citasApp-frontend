@@ -9,7 +9,7 @@ export const CitasItem = ({ citas, onSelect, onDelete }) => {
         <p className="mb-1 text-muted">Motivo de la visita: {citas.motivo}</p>
       </div>
       <div>
-        <button className="btn btn-warning btn-sm mr-2" onClick={() => onSelect(citas)}>
+        <button className="btn btn-warning btn-sm mr-2" onClick={() => onSelect(citas.id)}>
           Editar
         </button>
         <button className="btn btn-danger btn-sm" onClick={() => onDelete(citas.id)}>

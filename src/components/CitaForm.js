@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import CitaService from '../services/CitaService';
 import { useNavigate } from 'react-router-dom';
 
-const CitaForm = ({onSubmit, cita, recuperarDoctores, recuperarPacientes, recuperarClinicas, actualizarListaCitas, modoEditar, idActualizarCita }) => {
+const CitaForm = ({editarCita,onSubmit, cita, recuperarDoctores, recuperarPacientes, recuperarClinicas, actualizarListaCitas, modoEditar, idActualizarCita }) => {
   const navigate = useNavigate();
   const formularioInicial = {
     nombreMedico: "",
@@ -23,7 +23,16 @@ const CitaForm = ({onSubmit, cita, recuperarDoctores, recuperarPacientes, recupe
     }
     console.log("clinicas: ", recuperarClinicas)
     console.log("Pacientes: ", recuperarPacientes)
+    console.log("submit: ", onSubmit)
   }, []);
+
+  useEffect(() => {
+    console.log("editar: ", editarCita)
+    if (modoEditar && cita) {
+      setFormData(cita);  // Llenar el formulario con los datos de la cita
+    }
+  }, []);
+  
 
   const llenarFormularioDatosActualizar = async () => {
     const cita = await CitaService.getCitasById(idActualizarCita);
