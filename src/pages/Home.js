@@ -1,6 +1,11 @@
 import React from 'react';
 import '../components/Home.css'; // Importa el archivo CSS para los estilos personalizados
 import salud from '../../src/assets/salud-mental.png'; // Ruta hacia la imagen en assets
+import facebook from '../../src/assets/facebook.png'; // Ruta hacia la imagen en assets
+import whatsapp from '../../src/assets/whatsapp.png'; // Ruta hacia la imagen en assets
+import instagram from '../../src/assets/instagram.png'; // Ruta hacia la imagen en assets
+import twither from '../../src/assets/twui.png'; // Ruta hacia la imagen en assets
+import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
 
 const Home = () => {
@@ -36,9 +41,26 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="home-footer">
-        <p>© 2025 Mi Aplicación de Citas. Todos los derechos reservados.</p>
-      </div>
+       {/* Footer Mejorado */}
+       <footer className="home-footer">
+        <div className="footer-content">
+          <p>© 2025 Universidad de la Sierra Júarez. Todos los derechos reservados.</p>
+          <div className="social-icons">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <FaFacebook className="icon facebook" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <FaInstagram className="icon instagram" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <FaTwitter className="icon twitter" />
+            </a>
+            <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+              <FaWhatsapp className="icon whatsapp" />
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

@@ -10,6 +10,8 @@ import '../src/components/paciente/Paciente.css';
 import PacienteList from "./components/paciente/PacienteList";
 import Paciente from "./pages/Paciente";
 import ClinicaPage from './pages/ClinicaPage';
+import Footer from "./components/Footer";
+
 
 
  import EspecialidadForm from './components/Especialidad/EspecialidadForm';
@@ -36,6 +38,8 @@ const App = () => {
         <Route path="/clinicas/nueva" element={<ClinicaPage/>} />
         <Route path="/clinicas/:id" element={<ClinicaPage/>} />
         </Routes>
+        <Footer /> {/* Footer agregado aquí para que aparezca en todas las páginas */}
+
     </Router>
   );
 };

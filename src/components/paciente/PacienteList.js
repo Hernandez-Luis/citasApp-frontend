@@ -3,6 +3,8 @@ import pacienteService from "../../services/PacienteServices";
 import { Link } from "react-router-dom";
 import "../paciente/Paciente.css"; // Asegúrate de importar el archivo CSS
 import Swal from "sweetalert2";
+import { FaFacebook, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
+
 
 const PacienteListPage = () => {
   const [pacientes, setPacientes] = useState([]);
@@ -69,7 +71,7 @@ const PacienteListPage = () => {
               <td>{paciente.edad}</td>
               <td>{paciente.peso}</td>
               <td>
-                <Link to={`/pacientes/${paciente.id_paciente}`} className="btn btn-warning">
+                <Link to={`/pacientes/${paciente.id_paciente}`} className="me-4 btn btn-warning">
                   Editar
                 </Link>
                 <button
@@ -83,7 +85,9 @@ const PacienteListPage = () => {
           ))}
         </tbody>
       </table>
+      
     </div>
+    
   );
 };
 

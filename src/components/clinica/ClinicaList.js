@@ -72,7 +72,7 @@ const ClinicaList = () => {
               <td>{clinica.nombreClinica}</td>
               <td>{clinica.ubicacion}</td>
               <td>
-                <Link to={`/clinicas/${clinica.id_clinica}`} className="btn btn-warning">
+                <Link to={`/clinicas/${clinica.id_clinica}`} className="me-4 btn btn-warning">
                   Editar
                 </Link>
                 <button

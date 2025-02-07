@@ -4,7 +4,7 @@
 .home-container {
     background: url('/src/assets/fondo.jpg') no-repeat center center fixed; /* Imagen de fondo */
     background-size: cover;
-    height: 90vh;
+    height: 40vh;
     color: #fff;
     font-family: 'Arial', sans-serif;
     padding: 0;
@@ -56,7 +56,7 @@
   }
   
   .home-image {
-    max-width: 90%;
+    max-width: 45%;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
@@ -70,7 +70,7 @@
   .section-title {
     font-size: 2rem;
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 10px;
     color: #f0ad4e;
   }
   
@@ -97,5 +97,76 @@
     padding: 10px;
     font-size: 1rem;
     position: relative;
+  }
+  
+
+  /*Foother */
+
+  .home-footer {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 40px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    animation: fadeIn 1.5s ease-in-out;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .footer-content p {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .icon {
+    font-size: 24px;
+    color: white;
+    transition: transform 0.3s ease, color 0.3s ease;
+  }
+  
+  .icon:hover {
+    transform: scale(1.2);
+  }
+  
+  .facebook:hover {
+    color: #3b5998;
+  }
+  
+  .instagram:hover {
+    color: #c13584;
+  }
+  
+  .twitter:hover {
+    color: #1da1f2;
+  }
+  
+  .whatsapp:hover {
+    color: #25d366;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
