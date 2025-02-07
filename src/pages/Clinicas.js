@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ClinicaService from '../services/ClinicaService';
-import { ClinicaList } from '../components/ClinicaList';
-import { ClinicaForm } from '../components/ClinicaForm';
+import { ClinicaList } from '../../src/components/clinica/ClinicaList';
+import { ClinicaForm } from '../components/clinica/ClinicaForm';
 
 const ClinicaPage = () => {
   const [clinicas, setClinicas] = useState([]);

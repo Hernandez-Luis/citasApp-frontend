@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn }) => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const navigate = useNavigate(); // Para redirigir
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -11,8 +13,15 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para el login
-    console.log('Iniciar sesión con:', credentials);
+    
+    // Validación de campos
+    if (credentials.username && credentials.password) {
+      console.log('Iniciar sesión con:', credentials);
+      setIsLoggedIn(true); // Seteamos el estado de sesión como iniciado
+      navigate('/'); // Redirigimos al Home
+    } else {
+      alert('Por favor, ingrese su usuario y contraseña');
+    }
   };
 
   return (

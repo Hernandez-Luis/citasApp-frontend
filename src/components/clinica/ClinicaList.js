@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClinicaItem } from './ClinicaItem';
+import { ClinicaItem } from '../../components/clinica/ClinicaItem';
 
 export const ClinicaList = ({ clinicas, onSelect, onDelete }) => {
   return (
