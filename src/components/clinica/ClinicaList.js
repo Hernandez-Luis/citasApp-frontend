@@ -24,7 +24,7 @@ const ClinicaList = () => {
   };
 
   return (
-    <div className="clinica-list">
+    <div className="paciente-list container mt-5">
       <h2>Lista de Clínicas</h2>
       <Link to="/clinicas/nueva" className="btn btn-primary">
         Registrar Nueva Clínica

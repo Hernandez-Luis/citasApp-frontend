@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import clinicaService from "../../services/ClinicaService"; // Ajusta la ruta al archivo de servicio
+import "../paciente/Paciente.css";
+
 import { useNavigate } from "react-router-dom";
 
 const ClinicaForm = ({ clinicaId }) => {
@@ -50,7 +52,7 @@ const ClinicaForm = ({ clinicaId }) => {
   return (
     <div className="form-container">
       <h2>{clinicaId ? "Actualizar Clínica" : "Registrar Clínica"}</h2>
-      <form onSubmit={handleSubmit} className="clinica-form">
+      <form onSubmit={handleSubmit} className="paciente-form">
         <div className="form-group">
           <label>Nombre de la Clínica</label>
           <input
