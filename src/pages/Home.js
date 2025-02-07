@@ -17,7 +17,7 @@ const Home = () => {
         <div className="row">
           <div className="col-lg-6 text-center">
             <img
-              src={fondo} // Cambia esta URL por la imagen de tu preferencia
+              src={fondo} 
               alt="Citas Médicas"
               className="home-image"
             />
