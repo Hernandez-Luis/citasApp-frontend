@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import clinicaService from "../../services/ClinicaService";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+
 
 const ClinicaList = () => {
   const [clinicas, setClinicas] = useState([]);
@@ -15,12 +17,39 @@ const ClinicaList = () => {
   }, []);
 
   // Función para eliminar clínica
-  const handleDelete = async (id) => {
-    if (window.confirm("¿Estás seguro de que quieres eliminar esta clínica?")) {
-      await clinicaService.deleteClinicas(id);
-      // Actualizar la lista después de eliminar
-      setClinicas(clinicas.filter((clinica) => clinica.id_clinica !== id));
-    }
+   // Función para eliminar clínica con confirmación
+   const handleDelete = async (id) => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Esta acción no se puede deshacer.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await clinicaService.deleteClinicas(id);
+          setClinicas(clinicas.filter((clinica) => clinica.id_clinica !== id));
+
+          Swal.fire({
+            title: "Eliminado",
+            text: "La clínica ha sido eliminada correctamente.",
+            icon: "success",
+            timer: 3000,
+            timerProgressBar: true,
+          });
+        } catch (error) {
+          Swal.fire({
+            title: "Error",
+            text: "Hubo un problema al eliminar la clínica.",
+            icon: "error",
+          });
+        }
+      }
+    });
   };
 
   return (

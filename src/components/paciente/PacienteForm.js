@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import pacienteService from "../../services/PacienteServices"; 
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const PacienteForm = ({ pacienteId }) => {
   const [paciente, setPaciente] = useState({
@@ -38,10 +39,33 @@ const PacienteForm = ({ pacienteId }) => {
     try {
       if (pacienteId) {
         await pacienteService.updatePacientes(paciente, pacienteId);
+        Swal.fire({
+          title: "Registro exitoso",
+          text: "El paciente ha sido registrada correctamente.",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.getConfirmButton().style.backgroundColor = "blue";
+          }
+        });
       } else {
         await pacienteService.createPacientes(paciente);
+        setIsLoading(false);
+
+        Swal.fire({
+          title: "Registro exitoso",
+          text: "El paciente ha sido registrada correctamente.",
+          icon: "success",
+          confirmButtonText: "Aceptar",
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.getConfirmButton().style.backgroundColor = "blue";
+          }
+        });
       }
-      setIsLoading(false);
       navigate("/pacientes");
     } catch (error) {
       setIsLoading(false);

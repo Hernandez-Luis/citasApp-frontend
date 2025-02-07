@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import clinicaService from "../../services/ClinicaService"; 
 import "../paciente/Paciente.css";
+import Swal from "sweetalert2";
+
 
 import { useNavigate } from "react-router-dom";
 
@@ -42,6 +44,18 @@ const ClinicaForm = ({ clinicaId }) => {
         await clinicaService.createClinicas(clinica);
       }
       setIsLoading(false);
+       // Mostrar alerta de éxito
+       Swal.fire({
+        title: "Registro exitoso",
+        text: "La clínica ha sido registrada correctamente.",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.getConfirmButton().style.backgroundColor = "blue";
+        }
+      });
       navigate("/clinicas"); 
     } catch (error) {
       setIsLoading(false);
