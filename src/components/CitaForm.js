@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import CitaService from '../services/CitaService';
 import { useNavigate } from 'react-router-dom';
+import { form } from 'framer-motion/client';
 
-const CitaForm = ({ recuperarDoctores,recuperarPacientes,recuperarClinicas, actualizarListaCitas, modoEditar, idActualizarCita }) => {
+const CitaForm = ({ recuperarDoctores, recuperarPacientes, recuperarClinicas, actualizarListaCitas, modoEditar, idActualizarCita }) => {
   const navigate = useNavigate();
   const formularioInicial = {
     nombreMedico: "",
@@ -35,11 +36,13 @@ const CitaForm = ({ recuperarDoctores,recuperarPacientes,recuperarClinicas, actu
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("idddd: ", idActualizarCita)
+    
     try {
       if (modoEditar) {
         await CitaService.updateCita(formData, idActualizarCita)
         navigate("/citas")
       } else {
+        console.log("datos: ", formData)
         await CitaService.createCita(formData)
       }
 
@@ -73,7 +76,7 @@ const CitaForm = ({ recuperarDoctores,recuperarPacientes,recuperarClinicas, actu
           <div className="form-group mb-3">
             <label className="form-label">Fecha de la cita</label>
             <input
-              type="text"
+              type="date"
               name="fechaCita"
               value={formData.fechaCita}
               onChange={handleChange}
@@ -81,6 +84,7 @@ const CitaForm = ({ recuperarDoctores,recuperarPacientes,recuperarClinicas, actu
               required
             />
           </div>
+
           <div className="form-group mb-3">
             <label className="form-label">Motivo</label>
             <input
@@ -95,10 +99,16 @@ const CitaForm = ({ recuperarDoctores,recuperarPacientes,recuperarClinicas, actu
 
           <div className="form-group mb-3">
             <label className="form-label">Seleccionar clinica</label>
-            <select className="p-2 border rounded-lg form-control">
+            <select 
+            className="p-2 border rounded-lg form-control"
+            name="clinica"
+            value={formData.clinica}
+            onChange={(e) =>
+              setFormData({ ...formData, clinica: e.target.value })
+            }>
               <option value="">Seleccione una opcion</option>
               {recuperarClinicas.map((item) => (
-                <option key={item.id_clinica} value={item.nombreClinica}>
+                <option key={item.id_clinica} value={item.id_clinica}>
                   {item.nombreClinica}
                 </option>
               ))}
@@ -107,23 +117,35 @@ const CitaForm = ({ recuperarDoctores,recuperarPacientes,recuperarClinicas, actu
 
           <div className="form-group mb-3">
             <label className="form-label">Seleccionar paciente</label>
-            <select className="p-2 border rounded-lg form-control">
+            <select 
+            className="p-2 border rounded-lg form-control"
+            name="paciente"
+            value={formData.paciente}
+            onChange={(e) =>
+              setFormData({ ...formData, paciente: e.target.value })
+            }>
               <option value="">Seleccione una opcion</option>
               {recuperarPacientes.map((item) => (
-                <option key={item.id_paciente} value={item.nombrePaciente}>
+                <option key={item.id_paciente} value={item.id_paciente}>
                   {item.nombrePaciente}
                 </option>
               ))}
             </select>
           </div>
-          
+
           <div className="form-group mb-3">
-            <label className="form-label">Seleccionar paciente</label>
-            <select className="p-2 border rounded-lg form-control">
+            <label className="form-label">Seleccionar doctor</label>
+            <select 
+            className="p-2 border rounded-lg form-control"
+            name="idDoctorMongo"
+            value={formData.idDoctorMongo}
+            onChange={(e) =>
+              setFormData({ ...formData, idDoctorMongo: e.target.value })
+            }>
               <option value="">Seleccione una opcion</option>
-              {recuperarPacientes.map((item) => (
-                <option key={item.id_paciente} value={item.nombrePaciente}>
-                  {item.nombrePaciente}
+              {recuperarDoctores.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.nombre_doctor}
                 </option>
               ))}
             </select>
