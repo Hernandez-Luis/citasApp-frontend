@@ -38,8 +38,8 @@ const ClinicaPage = () => {
   };
 
   return (
-    <div className="clinica-page">
-      <h1>Gestión de Clínicas</h1>
+    <div className="container mt-5">
+      <h1 className="text-center mb-4">Gestión de Clínicas</h1>
       <ClinicaForm onSubmit={selectedClinica ? handleUpdateClinica : handleCreateClinica} clinica={selectedClinica} />
       <ClinicaList clinicas={clinicas} onSelect={setSelectedClinica} onDelete={handleDeleteClinica} />
     </div>

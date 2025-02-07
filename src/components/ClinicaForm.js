@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const ClinicaForm = ({ onSubmit, clinica }) => {
   const [formData, setFormData] = useState({
@@ -30,33 +31,37 @@ export const ClinicaForm = ({ onSubmit, clinica }) => {
   };
 
   return (
-    <div className="clinica-form">
-      <h2>{clinica ? 'Editar Clínica' : 'Crear Clínica'}</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Nombre de la Clínica</label>
-          <input
-            type="text"
-            name="nombreClinica"
-            value={formData.nombreClinica}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Ubicación</label>
-          <input
-            type="text"
-            name="ubicacion"
-            value={formData.ubicacion}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <button type="submit" className="submit-btn">
-          {clinica ? 'Actualizar Clínica' : 'Crear Clínica'}
-        </button>
-      </form>
+    <div className="container mt-5">
+      <div className="card shadow-lg p-4">
+        <h2 className="text-center">{clinica ? 'Editar Clínica' : 'Crear Clínica'}</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group mb-3">
+            <label className="form-label">Nombre de la Clínica</label>
+            <input
+              type="text"
+              name="nombreClinica"
+              value={formData.nombreClinica}
+              onChange={handleInputChange}
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="form-group mb-3">
+            <label className="form-label">Ubicación</label>
+            <input
+              type="text"
+              name="ubicacion"
+              value={formData.ubicacion}
+              onChange={handleInputChange}
+              className="form-control"
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-100">
+            {clinica ? 'Actualizar Clínica' : 'Crear Clínica'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

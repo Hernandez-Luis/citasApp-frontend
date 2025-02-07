@@ -1,0 +1,57 @@
+.navbar {
+    position: relative;
+    margin: 20px; /* Margen alrededor del navbar */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra para el efecto flotante */
+    padding: 10px; /* Padding interno */
+    background-color: #91a5b6; /* Un color de fondo más intenso */
+    
+  }
+  
+  .navbar .navbar-brand {
+    font-size: 1.75rem; /* Aumenta el tamaño del texto */
+    font-weight: bold; /* Para que el texto se vea más destacado */
+    color: #fff; /* Color blanco para las letras */
+  }
+  
+  .navbar-nav {
+    margin-left: auto; /* Para alinear los elementos a la derecha */
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1.1rem; /* Aumentar el tamaño del texto */
+    font-weight: 600; /* Establece un peso de fuente más grueso */
+    color: #fff !important; /* Asegura que los enlaces sean blancos */
+    padding: 10px 15px; /* Espaciado de los enlaces */
+    transition: all 0.3s ease; /* Transición suave al pasar el mouse */
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #f0ad4e !important; /* Color cuando se pasa el mouse por encima */
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo con sombra al pasar el mouse */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  
+  .navbar-toggler {
+    background-color: #fff; /* Cambiar color del botón de menú a blanco */
+  }
+  
+  .navbar-img {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    width: 60px; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    border-radius: 50%; /* Hace que la imagen sea redonda */
+    border: 2px solid #fff; /* Bordes blancos para resaltar la imagen */
+    padding: 5px; /* Agrega un pequeño espacio alrededor de la imagen */
+  }
+  
+  .container {
+    max-width: 1200px; /* Limita el ancho máximo del navbar */
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #1d72b8; /* Color de los iconos del menú */
+  }
+  
