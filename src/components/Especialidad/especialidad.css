@@ -1,0 +1,29 @@
+form div {
+    margin-bottom: 10px;
+  }
+  
+  input {
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  button {
+    padding: 10px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  li {
+    margin: 10px 0;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  
