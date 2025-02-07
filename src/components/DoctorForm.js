@@ -84,72 +84,93 @@ const DoctorForm = () => {
     };
 
     return (
-        <div>
-            <h2>{editing ? "Editar Doctor" : "Crear Doctor"}</h2>
-            <div>
-                <label>Nombre del Doctor:</label>
-                <input
-                    type="text"
-                    name="nombre_doctor"
-                    value={formData.nombre_doctor}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label>Teléfono:</label>
-                <input
-                    type="text"
-                    name="telefono"
-                    value={formData.telefono}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label>Correo:</label>
-                <input
-                    type="email"
-                    name="correo"
-                    value={formData.correo}
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label>Especialidad:</label>
-                <select
-                    name="especialidad"
-                    value={formData.especialidad.id || ""}  // Asegúrate de acceder al id del objeto
-                    onChange={handleChange}
-                >
-                    <option value="">Selecciona una especialidad</option>
-                    {especialidades.map((especialidad) => (
-                        <option key={especialidad.id} value={especialidad.id}>
-                            {especialidad.nombre_especialidad}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            <div>
-                {editing ? (
-                    <button onClick={() => handleUpdate(currentDoctorId)}>Actualizar Doctor</button>
-                ) : (
-                    <button onClick={handleCreate}>Crear Doctor</button>
-                )}
-            </div>
+        <div className="doctor-container">
+  <h2 className="titulo-formulario">{editing ? "Editar Doctor" : "Crear Doctor"}</h2>
+  <div className="doctor-form">
+    <div className="form-group">
+      <label className="etiqueta">Nombre del Doctor:</label>
+      <input
+        type="text"
+        name="nombre_doctor"
+        value={formData.nombre_doctor}
+        onChange={handleChange}
+        className="input"
+        required
+      />
+    </div>
+    <div className="form-group">
+      <label className="etiqueta">Teléfono:</label>
+      <input
+        type="text"
+        name="telefono"
+        value={formData.telefono}
+        onChange={handleChange}
+        className="input"
+        required
+      />
+    </div>
+    <div className="form-group">
+      <label className="etiqueta">Correo:</label>
+      <input
+        type="email"
+        name="correo"
+        value={formData.correo}
+        onChange={handleChange}
+        className="input"
+        required
+      />
+    </div>
+    <div className="form-group">
+      <label className="etiqueta">Especialidad:</label>
+      <select
+        name="especialidad"
+        value={formData.especialidad.id || ""}
+        onChange={handleChange}
+        className="select"
+        required
+      >
+        <option value="">Selecciona una especialidad</option>
+        {especialidades.map((especialidad) => (
+          <option key={especialidad.id} value={especialidad.id}>
+            {especialidad.nombre_especialidad}
+          </option>
+        ))}
+      </select>
+    </div>
+    <div className="form-buttons">
+      {editing ? (
+        <button className="btn btn-update" onClick={() => handleUpdate(currentDoctorId)}>
+          Actualizar Doctor
+        </button>
+      ) : (
+        <button className="btn btn-create" onClick={handleCreate}>
+          Crear Doctor
+        </button>
+      )}
+    </div>
+  </div>
 
-            <h3>Lista de Doctores</h3>
-            <ul>
-                {doctores.map((doctor) => (
-                    <li key={doctor.id}>
-                        <p>
-                            {doctor.nombre_doctor} - {doctor.telefono} - {doctor.correo} -{" "}
-                            {doctor.especialidad ? doctor.especialidad.nombre_especialidad : "Sin especialidad"}
-                        </p>
-                        <button onClick={() => handleEdit(doctor)}>Editar</button>
-                        <button onClick={() => handleDelete(doctor.id)}>Eliminar</button>
-                    </li>
-                ))}
-            </ul>
+  <h3 className="titulo-lista">Lista de Doctores</h3>
+  <ul className="lista-doctores">
+    {doctores.map((doctor) => (
+      <li key={doctor.id} className="item-doctor">
+        <p>
+          <strong>{doctor.nombre_doctor}</strong> - {doctor.telefono} - {doctor.correo} -{" "}
+          {doctor.especialidad ? doctor.especialidad.nombre_especialidad : "Sin especialidad"}
+        </p>
+        <div className="botones-doctor">
+          <button className="btn btn-editar" onClick={() => handleEdit(doctor)}>
+            Editar
+          </button>
+          <button className="btn btn-eliminar" onClick={() => handleDelete(doctor.id)}>
+            Eliminar
+          </button>
         </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
     );
 };
 
