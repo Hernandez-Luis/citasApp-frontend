@@ -11,6 +11,7 @@ export const ClinicaForm = ({ onSubmit, clinica }) => {
   useEffect(() => {
     if (clinica) {
       setFormData({
+        id: clinica.id,  // Agregar ID si existe
         nombreClinica: clinica.nombreClinica,
         ubicacion: clinica.ubicacion,
       });
