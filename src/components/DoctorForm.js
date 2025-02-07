@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import doctorService from "../services/DoctorService"; // Servicio de Doctores
 import especialidadService from "../services/EspecialidadService"; // Servicio de Especialidades
+import "../components/DoctorFormStyle.css"; 
 
 const DoctorForm = () => {
     const [formData, setFormData] = useState({
@@ -155,7 +156,7 @@ const DoctorForm = () => {
     {doctores.map((doctor) => (
       <li key={doctor.id} className="item-doctor">
         <p>
-          <strong>{doctor.nombre_doctor}</strong> - {doctor.telefono} - {doctor.correo} -{" "}
+          <strong>Doctor: </strong> {doctor.nombre_doctor} <strong>Telefono: </strong> {doctor.telefono}  <strong>Correo: </strong> {doctor.correo} <strong>Especialidad: </strong>
           {doctor.especialidad ? doctor.especialidad.nombre_especialidad : "Sin especialidad"}
         </p>
         <div className="botones-doctor">
