@@ -12,7 +12,9 @@ import Paciente from "./pages/Paciente";
 import ClinicaPage from './pages/ClinicaPage';
 
 
- 
+ import EspecialidadForm from './components/Especialidad/EspecialidadForm';
+import DoctorForm from './components/DoctorForm';
+
 const App = () => {
   return (
     <Router>
@@ -26,6 +28,8 @@ const App = () => {
 
         <Route path="/pacientes" element={<PacienteList/>}/>
         <Route path="/pacientes/nuevo" element={<Paciente />} />
+        <Route path="/especialidad" element={<EspecialidadForm />} />
+        <Route path="/doctor" element={<DoctorForm />} />
         <Route path="/pacientes/:id" element={<Paciente />} />
 
         <Route path="/clinicas" element={<ClinicasList />}/>
