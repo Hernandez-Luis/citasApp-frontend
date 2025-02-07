@@ -1,6 +1,6 @@
 import React from 'react';
 import '../components/Home.css'; // Importa el archivo CSS para los estilos personalizados
-import fondo from '../../src/assets/fondo.jpg'; // Ruta hacia la imagen en assets
+import salud from '../../src/assets/salud-mental.png'; // Ruta hacia la imagen en assets
 
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
         <div className="row">
           <div className="col-lg-6 text-center">
             <img
-              src={fondo} 
+              src={salud} 
               alt="Citas Médicas"
               className="home-image"
             />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import clinicaService from "../../services/ClinicaService"; // Ajusta la ruta al archivo de servicio
+import clinicaService from "../../services/ClinicaService"; 
 import "../paciente/Paciente.css";
 
 import { useNavigate } from "react-router-dom";
@@ -42,7 +42,7 @@ const ClinicaForm = ({ clinicaId }) => {
         await clinicaService.createClinicas(clinica);
       }
       setIsLoading(false);
-      navigate("/clinicas"); // Redirigir a la lista de clínicas después de guardar
+      navigate("/clinicas"); 
     } catch (error) {
       setIsLoading(false);
       console.error("Error al guardar la clínica:", error);
