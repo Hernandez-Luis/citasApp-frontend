@@ -8,6 +8,7 @@ import Clinicas from './pages/Clinicas';
 
 import DetalleCita from './components/DetalleCita';
 import EspecialidadForm from './components/Especialidad/EspecialidadForm';
+import DoctorForm from './components/DoctorForm';
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado de sesión
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/citas/:id" element={<DetalleCita />} />
         <Route path="/clinicas" element={<Clinicas />} />
         <Route path="/especialidad" element={<EspecialidadForm />} />
+        <Route path="/doctor" element={<DoctorForm />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
       </Routes>
     </Router>
