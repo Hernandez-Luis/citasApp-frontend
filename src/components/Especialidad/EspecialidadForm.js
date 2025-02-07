@@ -48,7 +48,7 @@ const EspecialidadForm = () => {
     try {
       const newEspecialidad = await especialidadService.create(formData);
       setEspecialidades((prev) => [...prev, newEspecialidad]);
-      setFormData({ id: '', nombre_especialidad: '', matricula: '', experiencia: '' });
+      setFormData({nombre_especialidad: '', matricula: '', experiencia: '' });
     } catch (error) {
       console.error("Error al crear especialidad:", error);
     }
@@ -62,7 +62,7 @@ const EspecialidadForm = () => {
           especialidad.id === formData.id ? updatedEspecialidad : especialidad
         )
       );
-      setFormData({ id: '', nombre_especialidad: '', matricula: '', experiencia: '' });
+      setFormData({nombre_especialidad: '', matricula: '', experiencia: '' });
     } catch (error) {
       console.error("Error al actualizar especialidad:", error);
     }
@@ -88,55 +88,63 @@ const EspecialidadForm = () => {
   };
 
   return (
-    <div>
-      <h2>Formulario de Especialidad</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nombre de Especialidad:</label>
-          <input
-            type="text"
-            name="nombre_especialidad"
-            value={formData.nombre_especialidad}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Matricula:</label>
-          <input
-            type="text"
-            name="matricula"
-            value={formData.matricula}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Experiencia:</label>
-          <input
-            type="text"
-            name="experiencia"
-            value={formData.experiencia}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">{formData.id ? 'Actualizar' : 'Crear'} Especialidad</button>
-      </form>
-
-      <h3>Lista de Especialidades</h3>
-      <ul>
-        {especialidades.map((especialidad) => (
-          <li key={especialidad.id}>
-            <div>
-              <strong>{especialidad.nombre_especialidad}</strong> - {especialidad.matricula} - {especialidad.experiencia}
-              <button onClick={() => handleEdit(especialidad)}>Editar</button>
-              <button onClick={() => handleDelete(especialidad.id)}>Eliminar</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+    <div className="form-container">
+  <h2 className="titulo-formulario">Formulario de Especialidad</h2>
+  <form onSubmit={handleSubmit} className="especialidad-form">
+    <div className="form-group">
+      <label className="etiqueta">Nombre de Especialidad:</label>
+      <input
+        type="text"
+        name="nombre_especialidad"
+        value={formData.nombre_especialidad}
+        onChange={handleChange}
+        required
+        className="input"
+      />
     </div>
+    <div className="form-group">
+      <label className="etiqueta">Matrícula:</label>
+      <input
+        type="text"
+        name="matricula"
+        value={formData.matricula}
+        onChange={handleChange}
+        required
+        className="input"
+      />
+    </div>
+    <div className="form-group">
+      <label className="etiqueta">Experiencia:</label>
+      <input
+        type="text"
+        name="experiencia"
+        value={formData.experiencia}
+        onChange={handleChange}
+        required
+        className="input"
+      />
+    </div>
+    <button type="submit" className="btn-submit">
+      {formData.id ? "Actualizar" : "Crear"} Especialidad
+    </button>
+  </form>
+
+  <h3 className="titulo-lista">Lista de Especialidades</h3>
+  <ul className="lista-especialidades">
+    {especialidades.map((especialidad) => (
+      <li key={especialidad.id} className="item-especialidad">
+        <div className="info-especialidad">
+          <strong>Especialidad: </strong>{especialidad.nombre_especialidad} - <strong>Matricula: </strong>{especialidad.matricula} - <strong>Experiencia: </strong>{especialidad.experiencia}
+        </div>
+        <div className="botones-especialidad">
+          <button className="btn-editar" onClick={() => handleEdit(especialidad)}>Editar</button>
+          <button className="btn-eliminar" onClick={() => handleDelete(especialidad.id)}>Eliminar</button>
+        </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
   );
 };
 
