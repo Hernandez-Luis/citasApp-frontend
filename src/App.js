@@ -4,16 +4,15 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Citas from './pages/Citas';
 import Login from './pages/Login';
-import Clinicas from './pages/Clinicas';
+import ClinicasList from '../src/components/clinica/ClinicaList';
 import DetalleCita from './components/DetalleCita';
 import '../src/components/paciente/Paciente.css'; 
 import PacienteList from "./components/paciente/PacienteList";
 import Paciente from "./pages/Paciente";
-import EspecialidadPage from './pages/Especialidad';  // Asegúrate de importar el componente de EspecialidadPage
+import ClinicaPage from './pages/ClinicaPage';
+
 
  
-
-
 const App = () => {
   return (
     <Router>
@@ -23,17 +22,16 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/citas" element={<Citas />} />
         <Route path="/citas/:id" element={<DetalleCita />} />
-        <Route path="/clinicas" element={<Clinicas />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/pacientes" element={<PacienteList/>} />
+
+        <Route path="/pacientes" element={<PacienteList/>}/>
         <Route path="/pacientes/nuevo" element={<Paciente />} />
         <Route path="/pacientes/:id" element={<Paciente />} />
 
-        <Route path="/especialidades/nuevo" element={<EspecialidadPage />} />
-        <Route path="/especialidades/:id" element={< EspecialidadPage/>} />
-
-        <Route path="/especialidades" element={<EspecialidadPage />} /> {/* Página principal de especialidades */}
-      </Routes>
+        <Route path="/clinicas" element={<ClinicasList />}/>
+        <Route path="/clinicas/nueva" element={<ClinicaPage/>} />
+        <Route path="/clinicas/:id" element={<ClinicaPage/>} />
+        </Routes>
     </Router>
   );
 };

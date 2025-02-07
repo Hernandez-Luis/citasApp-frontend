@@ -1,69 +1,84 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from "react";
+import clinicaService from "../../services/ClinicaService"; // Ajusta la ruta al archivo de servicio
+import { useNavigate } from "react-router-dom";
 
-
-export const ClinicaForm = ({ onSubmit, clinica }) => {
-  const [formData, setFormData] = useState({
-    nombreClinica: '',
-    ubicacion: '',
+const ClinicaForm = ({ clinicaId }) => {
+  const [clinica, setClinica] = useState({
+    nombreClinica: "",
+    ubicacion: ""
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (clinica) {
-      setFormData({
-        id: clinica.id,  // Agregar ID si existe
-        nombreClinica: clinica.nombreClinica,
-        ubicacion: clinica.ubicacion,
-      });
+    if (clinicaId) {
+      fetchClinica(clinicaId);
     }
-  }, [clinica]);
+  }, [clinicaId]);
+
+  const fetchClinica = async (id) => {
+    const data = await clinicaService.getClinicasById(id);
+    setClinica(data);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setClinica({
+      ...clinica,
+      [name]: value
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData);
-    setFormData({ nombreClinica: '', ubicacion: '' });
+    setIsLoading(true);
+
+    try {
+      if (clinicaId) {
+        await clinicaService.updateClinicas(clinica, clinicaId);
+      } else {
+        await clinicaService.createClinicas(clinica);
+      }
+      setIsLoading(false);
+      navigate("/clinicas"); // Redirigir a la lista de clínicas después de guardar
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Error al guardar la clínica:", error);
+    }
   };
 
   return (
-    <div className="container mt-5">
-      <div className="card shadow-lg p-4">
-        <h2 className="text-center">{clinica ? 'Editar Clínica' : 'Crear Clínica'}</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group mb-3">
-            <label className="form-label">Nombre de la Clínica</label>
-            <input
-              type="text"
-              name="nombreClinica"
-              value={formData.nombreClinica}
-              onChange={handleInputChange}
-              className="form-control"
-              required
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label className="form-label">Ubicación</label>
-            <input
-              type="text"
-              name="ubicacion"
-              value={formData.ubicacion}
-              onChange={handleInputChange}
-              className="form-control"
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary w-100">
-            {clinica ? 'Actualizar Clínica' : 'Crear Clínica'}
-          </button>
-        </form>
-      </div>
+    <div className="form-container">
+      <h2>{clinicaId ? "Actualizar Clínica" : "Registrar Clínica"}</h2>
+      <form onSubmit={handleSubmit} className="clinica-form">
+        <div className="form-group">
+          <label>Nombre de la Clínica</label>
+          <input
+            type="text"
+            name="nombreClinica"
+            value={clinica.nombreClinica}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Ubicación</label>
+          <input
+            type="text"
+            name="ubicacion"
+            value={clinica.ubicacion}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary" disabled={isLoading}>
+          {isLoading ? "Guardando..." : "Guardar"}
+        </button>
+      </form>
     </div>
   );
 };
+
+export default ClinicaForm;
