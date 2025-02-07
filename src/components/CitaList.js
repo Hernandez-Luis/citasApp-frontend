@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CitaService from '../services/CitaService';
+import { CitasItem } from './CitasItem';
 
-const CitaList = ({citasRegistradas}) => {
-
-  if (!citasRegistradas) {
-    citasRegistradas = [];
-  }
+const CitaList = ({citasRegistradas, onSelect, onDelete}) => {
 
   return (
-    <div>
-      <h2>Lista de Citas</h2>
-      <ul>
-        {citasRegistradas.map((cita) => (
-          <li key={cita.id}>
-            <Link to={`/citas/${cita.id}`}>{cita.nombrePaciente}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <div className="container mt-4">
+          <h3 className="mb-4 text-center">Citas agregadas</h3>
+          {citasRegistradas.length === 0 ? (
+            <p className="text-center text-muted">No hay clínicas disponibles.</p>
+          ) : (
+            <ul className="list-group">
+              {citasRegistradas.map((citas) => (
+                <CitasItem key={citas.id} citas={citas} onSelect={onSelect} onDelete={onDelete} />
+              ))}
+            </ul>
+          )}
+        </div>
   );
 };
 
