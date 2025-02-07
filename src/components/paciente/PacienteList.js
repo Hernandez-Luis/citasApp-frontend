@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import pacienteService from "../../services/PacienteServices";
 import { Link } from "react-router-dom";
+import "../paciente/Paciente.css"; // Asegúrate de importar el archivo CSS
 
-const PacienteList = () => {
+const PacienteListPage = () => {
   const [pacientes, setPacientes] = useState([]);
 
-  // Obtener lista de pacientes al cargar el componente
   useEffect(() => {
     const fetchPacientes = async () => {
       const data = await pacienteService.getPacientes();
@@ -14,18 +14,17 @@ const PacienteList = () => {
     fetchPacientes();
   }, []);
 
-  // Función para eliminar paciente
   const handleDelete = async (id) => {
     if (window.confirm("¿Estás seguro de que quieres eliminar este paciente?")) {
       await pacienteService.deletePacientes(id);
-      // Actualizar la lista después de eliminar
-      setPacientes(pacientes.filter((paciente) => paciente.id !== id));
+      setPacientes(pacientes.filter((paciente) => paciente.id_paciente !== id)); // Ajustado para usar 'id_paciente'
     }
   };
+
   return (
-    <div className="paciente-list">
+    <div className="paciente-list container mt-5">
       <h2>Lista de Pacientes</h2>
-      <Link to="/pacientes/nuevo" className="btn btn-primary">
+      <Link to="/pacientes/nuevo" className="btn btn-primary mb-3">
         Registrar Nuevo Paciente
       </Link>
       <table className="table">
@@ -39,17 +38,17 @@ const PacienteList = () => {
         </thead>
         <tbody>
           {pacientes.map((paciente) => (
-            <tr key={paciente.id}>
+            <tr key={paciente.id_paciente}>
               <td>{paciente.nombrePaciente}</td>
               <td>{paciente.edad}</td>
               <td>{paciente.peso}</td>
               <td>
-                <Link to={`/pacientes/${paciente.id}`} className="btn btn-warning">
+                <Link to={`/pacientes/${paciente.id_paciente}`} className="btn btn-warning">
                   Editar
                 </Link>
                 <button
-                  onClick={() => handleDelete(paciente.id)}
-                  className="btn btn-danger"
+                  onClick={() => handleDelete(paciente.id_paciente)}
+                  className="btn btn-danger ml-2"
                 >
                   Eliminar
                 </button>
@@ -62,4 +61,4 @@ const PacienteList = () => {
   );
 };
 
-export default PacienteList;
+export default PacienteListPage;

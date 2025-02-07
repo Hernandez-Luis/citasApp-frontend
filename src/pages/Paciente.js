@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 import PacienteForm from "../components/paciente/PacienteForm";
 
 const PacientePage = () => {
-  const { id } = useParams();  // Extraemos el id del paciente de la URL
+  const { id } = useParams(); // Extraemos el id del paciente de la URL
 
   return (
-    <div className="paciente-page">
+    <div className="paciente-page container mt-5">
       <PacienteForm pacienteId={id} />
     </div>
   );

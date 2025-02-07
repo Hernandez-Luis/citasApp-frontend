@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import pacienteService from "../../services/PacienteServices";  // Asegúrate de ajustar la ruta al archivo de servicio
+import pacienteService from "../../services/PacienteServices"; 
 import { useNavigate } from "react-router-dom";
 
 const PacienteForm = ({ pacienteId }) => {
@@ -42,7 +42,7 @@ const PacienteForm = ({ pacienteId }) => {
         await pacienteService.createPacientes(paciente);
       }
       setIsLoading(false);
-      navigate("/pacientes");  // Redirigir a la lista de pacientes después de guardar
+      navigate("/pacientes");
     } catch (error) {
       setIsLoading(false);
       console.error("Error al guardar el paciente:", error);
