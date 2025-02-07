@@ -5,6 +5,7 @@ import CitaForm from '../components/CitaForm';
 import ClinicaService from '../services/ClinicaService';
 import PacienteService from '../services/PacienteServices';
 import DoctorService from '../services/DoctorService';
+import Swal from 'sweetalert2';
 
 const Citas = () => {
 
@@ -62,6 +63,7 @@ const Citas = () => {
     CitaService.deleteCita(id).then(() => {
       setListaCitas(listaCitas.filter((cita) => cita.id !== id));
     });
+    mostrarExito("Cita eliminada de manera exitosa.")
   };
 
   const handleUpdateCitas = async (id) => {
@@ -88,6 +90,38 @@ const Citas = () => {
       );
     });
   }
+
+  const mostrarAlerta = (config) => {
+            Swal.fire({
+              ...config,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: () => {
+                const confirmButton = Swal.getConfirmButton();
+                confirmButton.style.backgroundColor = 'blue';
+              },
+            });
+          };
+        
+          const mostrarError = (mensajeHTML) => {
+            mostrarAlerta({
+              title: 'Error',
+              html: mensajeHTML, // Usa HTML para mostrar los errores sin viñetas
+              icon: 'error',
+              confirmButtonText: 'Aceptar',
+            });
+          };
+        
+        
+        
+          const mostrarExito = (mensaje) => {
+            mostrarAlerta({
+              title: 'Éxito',
+              text: mensaje,
+              icon: 'success',
+              confirmButtonText: 'Aceptar',
+            });
+          };
 
   return (
     <div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import especialidadService from '../../services/EspecialidadService'; // Asegúrate de que la ruta es correcta
 import './especialidad.css';
+import Swal from 'sweetalert2';
 
 const EspecialidadForm = () => {
   const [especialidades, setEspecialidades] = useState([]);
@@ -38,6 +39,7 @@ const EspecialidadForm = () => {
     if (formData.id) {
       // Si existe un id, es una actualización
       await handleUpdate();
+      
     } else {
       // Si no existe id, es una creación
       await handleCreate();
@@ -49,6 +51,7 @@ const EspecialidadForm = () => {
       const newEspecialidad = await especialidadService.create(formData);
       setEspecialidades((prev) => [...prev, newEspecialidad]);
       setFormData({nombre_especialidad: '', matricula: '', experiencia: '' });
+      mostrarExito("Especialidad creada de manera exitosa.")
     } catch (error) {
       console.error("Error al crear especialidad:", error);
     }
@@ -63,6 +66,7 @@ const EspecialidadForm = () => {
         )
       );
       setFormData({nombre_especialidad: '', matricula: '', experiencia: '' });
+      mostrarExito("Especialidad actualizada de manera exitosa")
     } catch (error) {
       console.error("Error al actualizar especialidad:", error);
     }
@@ -73,6 +77,7 @@ const EspecialidadForm = () => {
     try {
       await especialidadService.deleteEspecialidad(id);
       setEspecialidades((prev) => prev.filter((especialidad) => especialidad.id !== id));
+      mostrarExito("Especialidad eliminada de manera exitosa")
     } catch (error) {
       console.error("Error al eliminar especialidad:", error);
     }
@@ -86,6 +91,38 @@ const EspecialidadForm = () => {
       experiencia: especialidad.experiencia
     });
   };
+
+  const mostrarAlerta = (config) => {
+        Swal.fire({
+          ...config,
+          timer: 5000,
+          timerProgressBar: true,
+          didOpen: () => {
+            const confirmButton = Swal.getConfirmButton();
+            confirmButton.style.backgroundColor = 'blue';
+          },
+        });
+      };
+    
+      const mostrarError = (mensajeHTML) => {
+        mostrarAlerta({
+          title: 'Error',
+          html: mensajeHTML, // Usa HTML para mostrar los errores sin viñetas
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+        });
+      };
+    
+    
+    
+      const mostrarExito = (mensaje) => {
+        mostrarAlerta({
+          title: 'Éxito',
+          text: mensaje,
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+        });
+      };
 
   return (
     <div className="form-container">

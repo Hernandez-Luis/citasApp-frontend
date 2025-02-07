@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CitaService from '../services/CitaService';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const CitaForm = ({editarCita,onSubmit, cita, recuperarDoctores, recuperarPacientes, recuperarClinicas, actualizarListaCitas, modoEditar, idActualizarCita }) => {
   const navigate = useNavigate();
@@ -76,10 +77,44 @@ const CitaForm = ({editarCita,onSubmit, cita, recuperarDoctores, recuperarPacien
 
       setFormData(formularioInicial);
       actualizarListaCitas();
+
+      mostrarExito("Cita creada de manera exitosa.")
     } catch (error) {
       console.log("Error al guardar la cita: ", error)
     }
   };
+
+   const mostrarAlerta = (config) => {
+          Swal.fire({
+            ...config,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: () => {
+              const confirmButton = Swal.getConfirmButton();
+              confirmButton.style.backgroundColor = 'blue';
+            },
+          });
+        };
+      
+        const mostrarError = (mensajeHTML) => {
+          mostrarAlerta({
+            title: 'Error',
+            html: mensajeHTML, // Usa HTML para mostrar los errores sin viñetas
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+          });
+        };
+      
+      
+      
+        const mostrarExito = (mensaje) => {
+          mostrarAlerta({
+            title: 'Éxito',
+            text: mensaje,
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+          });
+        };
 
   return (
     <div className="container mt-5">

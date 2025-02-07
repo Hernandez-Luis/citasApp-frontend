@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import doctorService from "../services/DoctorService"; // Servicio de Doctores
 import especialidadService from "../services/EspecialidadService"; // Servicio de Especialidades
+import "../components/DoctorFormStyle.css"; 
+import Swal from 'sweetalert2';
 
 const DoctorForm = () => {
     const [formData, setFormData] = useState({
@@ -43,9 +45,11 @@ const DoctorForm = () => {
         try {
             const newDoctor = await doctorService.create(formData);
             setDoctores((prev) => [...prev, newDoctor]);
+            mostrarExito("Se ha agregado un nuevo doctor de manera exitosa.");
             setFormData({ nombre_doctor: "", telefono: "", correo: "", especialidad: {} });
         } catch (error) {
-            console.error("Error al crear doctor:", error);
+          mostrarError("Ups! Ocurrio un error inesperado")
+          console.error("Error al crear doctor:", error);
         }
     };
 
@@ -58,8 +62,10 @@ const DoctorForm = () => {
             setFormData({ nombre_doctor: "", telefono: "", correo: "", especialidad: {} });
             setEditing(false);
             setCurrentDoctorId(null);
+            mostrarExito("El doctor se actualizoo de manera exitosa.")
         } catch (error) {
-            console.error("Error al actualizar doctor:", error);
+          mostrarError("Ups! Ocurrio un error inesperado")
+          console.error("Error al actualizar doctor:", error);
         }
     };
 
@@ -67,8 +73,10 @@ const DoctorForm = () => {
         try {
             await doctorService.deleteDoctor(id);
             setDoctores((prev) => prev.filter((doctor) => doctor.id !== id));
+            mostrarExito("Eliminado de manera exitosa.")
         } catch (error) {
-            console.error("Error al eliminar doctor:", error);
+          mostrarError("Ups! Ocurrio un error inesperado")
+          console.error("Error al eliminar doctor:", error);
         }
     };
 
@@ -81,6 +89,38 @@ const DoctorForm = () => {
             especialidad: doctor.especialidad,  // Mantener el objeto de especialidad completo
         });
         setCurrentDoctorId(doctor.id);
+    };
+
+    const mostrarAlerta = (config) => {
+      Swal.fire({
+        ...config,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          confirmButton.style.backgroundColor = 'blue';
+        },
+      });
+    };
+  
+    const mostrarError = (mensajeHTML) => {
+      mostrarAlerta({
+        title: 'Error',
+        html: mensajeHTML, // Usa HTML para mostrar los errores sin viñetas
+        icon: 'error',
+        confirmButtonText: 'Aceptar',
+      });
+    };
+  
+  
+  
+    const mostrarExito = (mensaje) => {
+      mostrarAlerta({
+        title: 'Éxito',
+        text: mensaje,
+        icon: 'success',
+        confirmButtonText: 'Aceptar',
+      });
     };
 
     return (
@@ -155,7 +195,7 @@ const DoctorForm = () => {
     {doctores.map((doctor) => (
       <li key={doctor.id} className="item-doctor">
         <p>
-          <strong>{doctor.nombre_doctor}</strong> - {doctor.telefono} - {doctor.correo} -{" "}
+          <strong>Doctor: </strong> {doctor.nombre_doctor} <strong>Telefono: </strong> {doctor.telefono}  <strong>Correo: </strong> {doctor.correo} <strong>Especialidad: </strong>
           {doctor.especialidad ? doctor.especialidad.nombre_especialidad : "Sin especialidad"}
         </p>
         <div className="botones-doctor">
