@@ -9,6 +9,8 @@ import DetalleCita from './components/DetalleCita';
 import '../src/components/paciente/Paciente.css'; 
 import PacienteList from "./components/paciente/PacienteList";
 import Paciente from "./pages/Paciente";
+import EspecialidadPage from './pages/Especialidad';  // Asegúrate de importar el componente de EspecialidadPage
+
  
 
 
@@ -26,6 +28,11 @@ const App = () => {
         <Route path="/pacientes" element={<PacienteList/>} />
         <Route path="/pacientes/nuevo" element={<Paciente />} />
         <Route path="/pacientes/:id" element={<Paciente />} />
+
+        <Route path="/especialidades/nuevo" element={<EspecialidadPage />} />
+        <Route path="/especialidades/:id" element={< EspecialidadPage/>} />
+
+        <Route path="/especialidades" element={<EspecialidadPage />} /> {/* Página principal de especialidades */}
       </Routes>
     </Router>
   );

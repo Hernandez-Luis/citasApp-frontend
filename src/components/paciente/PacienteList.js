@@ -22,7 +22,6 @@ const PacienteList = () => {
       setPacientes(pacientes.filter((paciente) => paciente.id !== id));
     }
   };
-
   return (
     <div className="paciente-list">
       <h2>Lista de Pacientes</h2>
