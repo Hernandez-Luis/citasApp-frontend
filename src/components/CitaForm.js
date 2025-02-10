@@ -69,8 +69,8 @@ const CitaForm = ({editarCita,onSubmit, cita, recuperarDoctores, recuperarPacien
         // Enviar el objeto con los IDs de clinica y paciente
         const citaAEnviar = {
           ...formData,
-          clinica: { id_clinica: formData.clinica.id },
-          paciente: { id_paciente: formData.paciente.id }
+          clinica: { id_clinica: formData.clinica.id},
+          paciente: { id_paciente: formData.paciente.id}
         };
         console.log("Datos enviados a la API:", JSON.stringify(citaAEnviar, null, 2));
         await CitaService.createCita(citaAEnviar);
