@@ -1,33 +1,25 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Mínimo de la pantalla completa */
+}
+
+.main-content {
+  flex: 1; /* Hace que el contenido principal ocupe el espacio disponible */
+}
+
 .home-footer {
-    background-color: #222;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Asegúrate de que el footer esté encima de otros elementos */
-  }
-  
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .social-icons {
-    margin-top: 10px;
-  }
-  
-  .social-icons a {
-    color: white;
-    font-size: 20px;
-    margin: 0 10px;
-    transition: 0.3s;
-  }
-  
-  .social-icons a:hover {
-    color: #007bff;
-  }
-  
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  margin-top: auto; /* Empuja el footer hacia abajo */
+}

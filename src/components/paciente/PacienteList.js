@@ -85,9 +85,7 @@ const PacienteListPage = () => {
           ))}
         </tbody>
       </table>
-      
-    </div>
-    
+    </div> 
   );
 };
 
