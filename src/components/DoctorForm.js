@@ -3,6 +3,7 @@ import doctorService from "../services/DoctorService"; // Servicio de Doctores
 import especialidadService from "../services/EspecialidadService"; // Servicio de Especialidades
 import "../components/DoctorFormStyle.css"; 
 import Swal from 'sweetalert2';
+import { formToJSON } from "axios";
 
 const DoctorForm = () => {
     const [formData, setFormData] = useState({
@@ -42,6 +43,8 @@ const DoctorForm = () => {
     };
 
     const handleCreate = async () => {
+
+        
         try {
             const newDoctor = await doctorService.create(formData);
             setDoctores((prev) => [...prev, newDoctor]);

@@ -10,8 +10,8 @@ const CitaForm = ({editarCita,onSubmit, cita, recuperarDoctores, recuperarPacien
     fechaCita: "",
     hora: "",
     motivo: "",
-    clinica: { id_clinica: 1 }, // Aquí ya se asume que 'clinica' es un objeto
-    paciente: { id_paciente: 1 }, // Igual para 'paciente'
+    clinica: { id: 1 }, // Aquí ya se asume que 'clinica' es un objeto
+    paciente: { id: 1 }, // Igual para 'paciente'
     idDoctorMongo: ""
   }
 
@@ -56,6 +56,7 @@ const CitaForm = ({editarCita,onSubmit, cita, recuperarDoctores, recuperarPacien
   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     console.log("datos: ", formData)
 
@@ -68,10 +69,10 @@ const CitaForm = ({editarCita,onSubmit, cita, recuperarDoctores, recuperarPacien
         // Enviar el objeto con los IDs de clinica y paciente
         const citaAEnviar = {
           ...formData,
-          cita: { id_clinica: formData.clinica.id_clinica },
-          paciente: { id_paciente: formData.paciente.id_paciente }
+          clinica: { id_clinica: formData.clinica.id },
+          paciente: { id_paciente: formData.paciente.id }
         };
-        console.log("Enviar cita: ", citaAEnviar);
+        console.log("Datos enviados a la API:", JSON.stringify(citaAEnviar, null, 2));
         await CitaService.createCita(citaAEnviar);
       }
 
